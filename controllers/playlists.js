@@ -1,3 +1,7 @@
 module.exports = {
-    show
+    index
 };
+
+function index(req, res){
+    res.render('playlists/index');
+}
