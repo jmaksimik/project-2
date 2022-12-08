@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlayStar</title>
+</head>
+<body>
+    <nav>
+        <a href="/">HOME</a>
+        <% if(user) { %>
+         <a href="/playlists">MY PLAYLISTS</a>
+         <% } else { %>
+         <a href="/auth/google">MY PLAYLISTS</a>   
+        <% } %>
+        <a href="/playlists/community">COMMUNITY PLAYLISTS</a>
+        <% if(user) { %>
+            <h2>Logged in as <%= user.userName %></h2>
+        <% } else { %>
+            <a href="/auth/google" class="login">LOG IN</a>
+        <% } %> 
+    </nav>
+<main>
