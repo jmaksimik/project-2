@@ -1,7 +1,21 @@
 const Playlist = require('../models/playlist');
 
 module.exports = {
-    create
+    create,
+    delete: deleteSong
+};
+
+function deleteSong(req, res){
+    Playlist.findOne(
+        {'songs._id': req.params.id, 'songs.userId': req.user._id},
+        function(err, playlist){
+            if (!playlist || err) return res.redirect(`/playlists/${playlist._id}`);
+            playlist.songs.remove(req.params.id);
+            playlist.save(function(err){
+                res.redirect(`/playlists/${playlist._id}`);
+            })
+        }
+    )
 };
 
 function create(req, res){

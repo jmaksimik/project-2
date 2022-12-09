@@ -8,6 +8,7 @@ router.get('/', isLoggedIn, playlistCtrl.index);
 router.post('/', isLoggedIn, playlistCtrl.create);
 router.get('/community', playlistCtrl.allPlaylists);
 router.get('/:id', isLoggedIn, playlistCtrl.show)
+router.delete('/:id', isLoggedIn, playlistCtrl.delete);
 
 
 

@@ -5,7 +5,19 @@ module.exports = {
     allPlaylists,
     create,
     new: newPlaylist,
-    show
+    show,
+    delete: deletePlaylist
+};
+
+function deletePlaylist(req, res){
+    Playlist.findOneAndDelete(
+        {_id: req.params.id, user: req.user._id}, function(err){
+            if(err){
+                res.send('error in deleting, check terminal')
+            };
+            res.redirect('/playlists');
+        }
+    )
 };
 
 function show(req, res) {
