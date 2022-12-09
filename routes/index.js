@@ -6,7 +6,6 @@ const passport = require('passport');
 router.get('/', function(req, res) {
   console.log('Index initialization');
   res.render('index')
-  //res.redirect('/playlists/index')
   //UPDATE THIS
   // Where do you want to go for the root route
   // in the student demo this was res.redirect('/movies'), what do you want?

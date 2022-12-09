@@ -22,7 +22,7 @@
      <% } else { %>
       <h2>No Songs - Start Adding!</h2>
     <% } %>
-    <form id="new-form" action="/playlists" method="POST">
+    <form id="add-song-form" action="/playlists/<%=playlist._id%>/songs" method="POST">
         <label>Song Title:</label>
         <input type="text" name="title" required>
         <label>Artist:</label>

@@ -6,7 +6,6 @@ const commentSchema = new Schema({
     user: {
         type: Schema.Types.ObjectId,
         ref: 'User',
-        required: true
     },
     userName: String
 });
@@ -20,7 +19,11 @@ const songSchema = new Schema({
          type: String,
          required: true
       },
-      genre: String
+      genre: String,
+      user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+    }
 });
 
 const playlistSchema = new Schema({
@@ -34,7 +37,6 @@ const playlistSchema = new Schema({
      user: {
         type: Schema.Types.ObjectId,
         ref: 'User',
-        required: true
      }
 });
 
