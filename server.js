@@ -11,6 +11,7 @@ const methodOverride = require('method-override');
 
 const indexRouter = require('./routes/index');
 const playlistsRouter = require('./routes/playlists');
+const songRouter = require('./routes/songs')
 
 
 // create the Express app
@@ -24,16 +25,15 @@ require('./config/passport');
 
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
-app.use(methodOverride('_method'));
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(logger('dev'));
+app.set('views', path.join(__dirname, 'views'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
+app.use(logger('dev'));
 app.use(cookieParser());
 // mount the session middleware
+app.use(methodOverride('_method'));
 app.use(session({
   secret: process.env.SECRET,
   resave: false,
@@ -54,6 +54,7 @@ app.use(function (req, res, next) {
 // mount all routes with appropriate base paths
 app.use('/', indexRouter);
 app.use('/playlists', playlistsRouter);
+app.use('/', songRouter);
 
 
 // invalid request, send 404 page

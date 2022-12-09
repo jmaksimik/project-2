@@ -1,3 +1,10 @@
 <%- include('../partials/header')%> 
     <h1>User Home Page</h1>
+    <a href="/playlists/new">Add Playlist</a>
+    <h2>Playlists</h2>
+    <ul>
+        <% playlist.forEach(p => { %>
+            <li><a href='/playlists/<%=p._id%>'><%= p.playlistName %></a></li>
+        <% }) %>
+    </ul>
 <%- include('../partials/footer')%> 

@@ -1,12 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-</head>
-<body>
-    
-</body>
-</html>
+<%- include('../partials/header')  %> 
+    <h1><%= playlist.playlistName %> </h1>
+    <% if (playlist.songs.length) { %>
+        <table>
+            <thead>
+                <tr>
+                    <th>Song</th>
+                    <th>Artist</th>
+                    <th>Genre</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% playlist.songs.forEach(s => { %>
+                 <tr>
+                    <td><%= s.title %> </td>
+                    <td><%= s.artist %> </td>
+                    <td><%= s.genre %> </td>
+                 </tr>
+                <% }) %>
+            </tbody>
+        </table>
+     <% } else { %>
+      <h2>No Songs - Start Adding!</h2>
+    <% } %>
+    <form id="new-form" action="/playlists" method="POST">
+        <label>Song Title:</label>
+        <input type="text" name="title" required>
+        <label>Artist:</label>
+        <input type="text" name="artist" required>
+        <label>Genre:</label>
+        <input type="text" name="genre">
+        <input type="submit" value="Add Song">
+    </form>
+<%- include('../partials/footer')  %> 
