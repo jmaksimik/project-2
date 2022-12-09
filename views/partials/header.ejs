@@ -16,6 +16,7 @@
         <% } %>
         <a href="/playlists/community">COMMUNITY PLAYLISTS</a>
         <% if(user) { %>
+            <a href="/logout">LOG OUT</a>
             <h2>Logged in as <%= user.userName %></h2>
         <% } else { %>
             <a href="/auth/google" class="login">LOG IN</a>
