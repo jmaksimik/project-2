@@ -1,7 +1,7 @@
 const Playlist = require('../models/playlist');
 
 module.exports = {
-    create
+    create,
 };
 
 function create(req, res){

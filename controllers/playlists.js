@@ -6,7 +6,23 @@ module.exports = {
     create,
     new: newPlaylist,
     show,
-    delete: deletePlaylist
+    delete: deletePlaylist,
+};
+
+function edit(req, res){
+
+};
+
+function update(req, res){
+    Playlist.findOneAndUpdate(
+        {_id: req.params.id, user: req.user._id},
+        req.body,
+        {new: true},
+        function(err, playlist){
+            if (err || !playlist) return res.redirect('/playlists');
+            res.redirect(`/playlists/${playlist._id}`);
+        }
+    )
 };
 
 function deletePlaylist(req, res){
@@ -38,11 +54,12 @@ function newPlaylist(req, res) {
     res.render('playlists/new');
 }
 
-function allPlaylists(req, res) {
-    res.render('playlists/all');
+async function allPlaylists(req, res) {
+    let playlist = await Playlist.find({});
+    res.render('playlists/all', {playlist});
 }
 
 async function index(req, res) {
-    let playlist = await Playlist.find({});
+    let playlist = await Playlist.find({user: req.user._id});
     res.render('playlists/index', { playlist });
 }
