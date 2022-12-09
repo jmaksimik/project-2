@@ -36,4 +36,45 @@
         <input type="text" name="genre">
         <input type="submit" value="Add Song">
     </form>
+    <h2>Comments</h2>
+    <% if (user) { %>
+        <form id="add-comment-form" method="POST" 
+        action="/playlists/<%=playlist._id%>/comments">
+            <textarea name="text"></textarea>
+            <button type="submit">Add Coment</button>
+    </form>
+    <% } else { %>
+     <span>You have to <a href='/auth/google'>Log in</a> in order to submit!</span>
+    <% } %>
+    <% if (playlist.comments.length) { %>
+        <table>
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Date</th>
+                    <th>Comment</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% playlist.comments.forEach(function(c) { %>
+                    <tr>
+                        <td class="user-info"><%=c.userName%></td>
+                        <td>
+                            <%= c.createdAt.toLocaleDateString()%> 
+                        </td>
+                        <td><%= c.text %> </td>
+                        <td>
+                            <% if (user && user._id.equals(c.user)) { %>
+                                <form action="/comments/<%=c._id%>?_method=DELETE" method="POST">
+                                    <button type="submit">Delete Comment</button>
+                                </form>                                    
+                            <% } %>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        <% } else { %>
+         <h5>No Reviews Yet. Change that!</h5>
+    <% } %>
 <%- include('../partials/footer')  %> 

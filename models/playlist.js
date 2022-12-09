@@ -6,9 +6,15 @@ const commentSchema = new Schema({
     user: {
         type: Schema.Types.ObjectId,
         ref: 'User',
+
     },
     userName: String
-});
+
+},
+{
+    timestamps: true,
+}
+);
 
 const songSchema = new Schema({
     title: {
@@ -24,7 +30,11 @@ const songSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User',
     }
-})
+},
+{
+    timestamps: true
+}
+)
 
 const playlistSchema = new Schema({
     playlistName: {
@@ -38,6 +48,10 @@ const playlistSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User',
      }
-});
+},
+{
+    timestamps: true
+}
+);
 
 module.exports = mongoose.model('Playlist', playlistSchema);
