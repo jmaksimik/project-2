@@ -67,7 +67,11 @@
                             <% if (user && user._id.equals(c.user)) { %>
                                 <form action="/comments/<%=c._id%>?_method=DELETE" method="POST">
                                     <button type="submit">Delete Comment</button>
-                                </form>                                    
+                                </form>
+                                <form action="/comments/<%= c._id%>?_method=PUT" method="POST">
+                                    <input name="text" value="<%= c.text %>">
+                                    <button type="submit">Edit Comment</button>
+                                </form>     
                             <% } %>
                         </td>
                     </tr>
