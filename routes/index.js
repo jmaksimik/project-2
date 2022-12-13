@@ -4,7 +4,6 @@ const passport = require('passport');
 
 // The root route renders our only view
 router.get('/', function(req, res) {
-  console.log('Index initialization');
   res.render('index')
   //UPDATE THIS
   // Where do you want to go for the root route
@@ -29,8 +28,10 @@ router.get('/oauth2callback', passport.authenticate(
 ));
 
 // OAuth logout route
-router.get('/logout', function(req, res){
-  req.logout(function(){ //< - req.logout comes from passport, and what it does is destorys the cookie keeping track of the user!
+router.get('/logout', function(req, res, next){
+  req.logout(function(err){ //< - req.logout comes from passport, and what it does is destorys the cookie keeping track of the user!
+    console.log(err);
+    if (err) return next(err);
     res.redirect('/') // <---- UPDATE THIS TO WHERE YOU WANT THE USER TO GO AFTER LOGOUT
   })
 })
