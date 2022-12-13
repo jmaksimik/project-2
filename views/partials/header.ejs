@@ -12,6 +12,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
     </style>
+    <script defer src="js/app.js"></script>
     <title>TunedIn</title>
 </head>
 
@@ -29,5 +30,6 @@
                         <% } else { %>
                             <a href="/auth/google">LOG IN</a>
                             <% } %>
+        <p>Logged in as <%= user.userName %> </p>
     </nav>
     <main>
