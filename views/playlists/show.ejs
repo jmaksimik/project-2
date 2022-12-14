@@ -15,7 +15,7 @@
                     <td><%= s.title %> </td>
                     <td><%= s.artist %> </td>
                     <td><%= s.genre %> </td>
-                    <td><form action="/songs/<%=s._id%>?_method=DELETE"
+                    <td><form class="delete-form" action="/songs/<%=s._id%>?_method=DELETE"
                         class="song-delete" method="POST">
                             <button type="submit">Delete Song</button>
                         </form>
@@ -27,21 +27,21 @@
      <% } else { %>
       <h2>No Songs - Start Adding!</h2>
     <% } %>
-    <form id="add-song-form" action="/playlists/<%=playlist._id%>/songs" method="POST">
+    <form class="add-form" action="/playlists/<%=playlist._id%>/songs" method="POST">
         <label>Song Title:</label>
-        <input type="text" name="title" required>
+        <input type="text" name="title" required>&nbsp;&nbsp;
         <label>Artist:</label>
-        <input type="text" name="artist" required>
+        <input type="text" name="artist" required>&nbsp;&nbsp;
         <label>Genre:</label>
-        <input type="text" name="genre">
-        <input type="submit" value="Add Song">
+        <input type="text" name="genre">&nbsp;&nbsp;
+        <input id="adds" type="submit" value="Add Song">
     </form>
-    <h2>Comments</h2>
+    <h2 id="comments-header">Comments</h2>
     <% if (user) { %>
-        <form id="add-comment-form" method="POST" 
+        <form class="add-comment-form" method="POST" 
         action="/playlists/<%=playlist._id%>/comments">
             <textarea name="text"></textarea>
-            <button type="submit">Add Coment</button>
+            <button id="adds" type="submit">Add Comment</button>
     </form>
     <% } else { %>
      <span>You have to <a href='/auth/google'>Log in</a> in order to submit!</span>
@@ -62,15 +62,15 @@
                         <td>
                             <%= c.createdAt.toLocaleDateString()%> 
                         </td>
-                        <td><%= c.text %> </td>
-                        <td>
+                        <td id="comment-text"><%= c.text %> </td>
+                        <td id="comment-edits">
                             <% if (user && user._id.equals(c.user)) { %>
-                                <form action="/comments/<%=c._id%>?_method=DELETE" method="POST">
-                                    <button type="submit">Delete Comment</button>
-                                </form>
                                 <form action="/comments/<%= c._id%>?_method=PUT" method="POST">
-                                    <input name="text" value="<%= c.text %>">
+                                    <input id="comment-text" name="text" value="<%= c.text %>">
                                     <button type="submit">Edit Comment</button>
+                                </form>
+                                <form action="/comments/<%=c._id%>?_method=DELETE" method="POST">
+                                    <button id="delete-comment" type="submit">Delete Comment</button>
                                 </form>     
                             <% } %>
                         </td>
@@ -79,6 +79,6 @@
             </tbody>
         </table>
         <% } else { %>
-         <h5>No Reviews Yet. Change that!</h5>
+         <h5>No Comments Yet. Change that!</h5>
     <% } %>
 <%- include('../partials/footer')  %> 

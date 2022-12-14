@@ -1,13 +1,12 @@
 <%- include('../partials/header')%> 
     <h1>My Playlists</h1>
-    <a href="/playlists/new">Add Playlist</a>
-    <h2>Playlists</h2>
+    <button id="adds"><a href="/playlists/new">Add Playlist</a></button>
     <ul>
         <% playlist.forEach(p => { %>
             <li><a href='/playlists/<%=p._id%>'><%= p.playlistName%></a>
-            <form action="/playlists/<%=p._id%>?_method=DELETE"
+            <form class = "delete-form" action="/playlists/<%=p._id%>?_method=DELETE"
                 class="my-playlist-delete" method="POST">
-                    <button type="submit">X</button>
+                    <button id="deletes" type="submit">X</button>
                 </form>
             </li>
         <% }) %>

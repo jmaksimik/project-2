@@ -1,14 +1,8 @@
 <%- include('../partials/header')  %> 
-    <h1>Community Playlists</h1> 
-    <h2>Playlists</h2>
-    <ul>
+    <h1>Community Playlists</h1>
+    <ul id="community-list">
         <% playlist.forEach(p => { %>
-            <li><a href='/playlists/<%=p._id%>'><%= p.playlistName%></a>
-            <form action="/playlists/<%=p._id%>?_method=DELETE"
-                class="my-playlist-delete" method="POST">
-                    <button type="submit">X</button>
-                </form>
-            </li>
+            <li><a href='/playlists/<%=p._id%>'><%= p.playlistName%></a></li>
         <% }) %>
     </ul>
 <%- include('../partials/footer')  %> 
